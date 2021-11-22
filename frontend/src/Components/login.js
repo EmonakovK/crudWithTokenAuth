@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+const axios = require('axios');
 
 class Login extends Component 
 {
@@ -8,31 +9,21 @@ class Login extends Component
   }
 
   login = event => {
-    fetch('http://127.0.0.1:8000/auth/', {
-      method: 'POST',
-      headers: {'Content-type': 'application/json'},
-      body: JSON.stringify(this.state.credentials)
+    axios.post('http://127.0.0.1:8000/auth/jwt/create/', {
+      username: this.state.credentials.username,
+      password: this.state.credentials.password
     })
-    .then(data => data.json())
-    .then(
-      data => {
-        this.props.userLogin(data.token);
-      }
+    .then(data => localStorage.setItem("JWTToken", data.data.access)
     ).catch(error => console.log(error))
   }
 
     register = event => {
-    fetch('http://127.0.0.1:8000/api/users/', {
-      method: 'POST',
-      headers: {'Content-type': 'application/json'},
-      body: JSON.stringify(this.state.credentials)
+    axios.post('http://127.0.0.1:8000/auth/users/', {
+      username: this.state.credentials.username,
+      password: this.state.credentials.password
     })
-    .then(data => data.json())
-    .then(
-      data => {
-        console.log(data.token);
-      }
-    ).catch(error => console.log(error))
+    .then(data => console.log(data.token))
+    .catch(error => console.log(error))
   }
 
   inputChanged = event => {

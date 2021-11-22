@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+const axios = require('axios');
+
 
 class Books extends Component 
 {
@@ -8,20 +10,15 @@ class Books extends Component
   }
 
   loadBooks = event => {
-    fetch('http://127.0.0.1:8000/api/books/', {
-      method: 'GET',
+    axios.get('http://127.0.0.1:8000/api/books/', {
       headers: {
         'Content-type': 'application/json',
-        Authorization: `Token ${this.props.token}`
+        Authorization: `Bearer ${localStorage.getItem("JWTToken")}`
       },
-      body: JSON.stringify(this.state.credentials)
+      book: this.state.credentials
     })
-    .then(data => data.json())
-    .then(
-      data => {
-        this.setState({books: data})
-      }
-    ).catch(error => console.log(error))
+    .then(data => this.setState({books: data.conversations}))
+    .catch(error => console.log(error))
   }
 
   render()
@@ -29,9 +26,8 @@ class Books extends Component
     return (
       <div>
         <h1>Books</h1>
-        {this.state.books.map(book => {
-          return <h3 key={book.id}>{book.title}</h3>
-        })}
+        {this.state.books.map(book => {return <h3 key={book.id}>{book.title}</h3>})}
+
         <button onClick={this.loadBooks}>Load Books</button>
       </div>
     );
