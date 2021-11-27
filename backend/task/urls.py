@@ -1,9 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
-import sys
-sys.path.append('..')
-from api.views import TestTry
+from .views import TestTry
 
 
 urlpatterns = [

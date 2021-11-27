@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_json_api',
     'rest_framework_jwt',
-    'rest_framework.authtoken',
     'djoser',
     'django_filters',
     'corsheaders',
@@ -98,9 +97,6 @@ DATABASES = {
 #     },
 # ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -126,11 +122,11 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAdminUser',
-    #     'rest_framework.permissions.AllowAny',
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAdminUser',
+        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -145,4 +141,3 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7)  # default
 }
-
