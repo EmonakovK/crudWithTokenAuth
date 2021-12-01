@@ -14,6 +14,6 @@ DATABASES = {
     }
 }
 
-STATIC_URL = '/static/'
-
 ROOT_URLCONF = 'task.urls'
+
+STATIC_URL = '/static/'
