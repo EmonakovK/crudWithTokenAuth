@@ -1,5 +1,8 @@
 /venv
 
+/backend/task/base_settings.py
+/backend/task/local_settings.py
+/backend/task/production_settings.py
 /backend/.idea
 /backend/.env
 /backend/api/__pycache__
